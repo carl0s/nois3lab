@@ -27,7 +27,7 @@ class WorksController < ApplicationController
     @service = Service.find(@service_id)
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @work }
+      format.json { render json: {:work => @work, :client => @client, :teammate => @teammate, :media_asset => @media_asset, :service => @service } }
     end
   end
 
