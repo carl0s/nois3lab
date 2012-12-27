@@ -4,4 +4,6 @@ class Teammate < ActiveRecord::Base
   has_many :tags
   has_many :skills
   has_one :job_position
+
+  validates :fullname, :presence => true
 end

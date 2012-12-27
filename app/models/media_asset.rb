@@ -6,4 +6,7 @@ class MediaAsset < ActiveRecord::Base
   has_many :posts
   has_many :skills
   has_many :tags
+
+  validates :name, :presence => true
+  validates :image, :presence => true
 end

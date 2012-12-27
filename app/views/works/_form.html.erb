@@ -13,34 +13,51 @@
 
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :placeholder => :name %>
+  </div>
+  <div class="field">
+    <%= f.label :year %><br />
+    <%= f.text_field :year %>
+  </div>
+  <div class="field">
+    <%= f.label :is_public %><br />
+    <%= f.check_box :is_public %>
+  </div>
+  <div class="field">
+    <%= f.label :is_recap %><br />
+    <%= f.check_box :is_recap %>
+  </div>
+  <div class="field">
+    <%= f.label :is_event %><br />
+    <%= f.check_box :is_event %>
   </div>
   <div class="field">
     <%= f.label :content %><br />
     <%= f.text_area :content %>
   </div>
 
-  <div class="row">
+  <div class="field">
     <h2>Service</h2>
     <%= collection_select(:work, :service_id, Service.find(:all), :id, :name) %>
   </div>
-  <div class="row">
-      <%= text_field_tag 'name', '', :autocomplete => autocomplete_tag_name_works_path %>
+  <div class="field">
+    <h2>Tags</h2>
+    <%= text_field_tag 'name', '', :autocomplete => autocomplete_tag_name_works_path %>
   </div>
 
-  <div class="row">
+  <div class="field">
     <h2>Media assets</h2>
     <%= collection_select(:work, :media_id, MediaAsset.find(:all), :id, :name) %>
   </div>
-  <div class="row">
+  <div class="field">
     <h2>Clients</h2>
     <%= collection_select(:work, :client_id, Client.find(:all), :id, :name) %>
   </div>
-  <div class="row">
+  <div class="field">
     <h2>Team mates</h2>
     <%= collection_select(:work, :teammate_id, Teammate.find(:all), :id, :fullname) %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => 'button' %>
   </div>
 <% end %>

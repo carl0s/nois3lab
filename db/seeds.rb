@@ -6,12 +6,16 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Tag.create(name: 'a')
-Tag.create(name: 'b')
-Tag.create(name: 'c')
+Tag.create(name: 'Ruby on Rails')
+Tag.create(name: 'Drupal')
+Tag.create(name: 'Wordpress')
+Tag.create(name: 'CMS')
+Tag.create(name: 'E-commerce')
 
-Teammate.create(fullname: 'Nome Cognome')
+Service.create(name: 'web', content:'dummy')
+Service.create(name: 'events', content:'dummy')
+Service.create(name: 'communication', content:'dummy')
 
-Work.create(name: 'Test')
+Teammate.create(fullname: 'Nome Cognome', bio: 'dummy bio', twitter: '@dummy', facebook: 'name.lastname', linkedin: 'test')
 
-Client.create(name: 'Test Client')
+Client.create(name: 'Test Client', content: 'Dummy content', url: 'http://www.example.com')
