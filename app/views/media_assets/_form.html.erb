@@ -1,0 +1,28 @@
+<%= form_for(@media_asset) do |f| %>
+  <% if @media_asset.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@media_asset.errors.count, "error") %> prohibited this media_asset from being saved:</h2>
+
+      <ul>
+      <% @media_asset.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="preview">
+    <%= image_tag(@media_asset.image, :size => '50x50', :alt => @media_asset.name, :class => 'thumb') %>
+  </div>
+  <div class="field">
+    <%= f.file_field :image %>
+    <%= f.hidden_field :image_cache %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

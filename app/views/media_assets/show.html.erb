@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @media_asset.name %>
+  <b>Name:</b>
+  <%= image_tag(@media_asset.image, :alt => @media_asset.name, :class => 'thumb') %>
+</p>
+
+
+<%= link_to 'Edit', edit_media_asset_path(@media_asset) %> |
+<%= link_to 'Back', media_assets_path %>

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @work.name %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @work.content %>
+</p>
+<p>
+  <b>Client:</b>
+  <%= @client.name %>
+</p>
+<p>
+  <b>Service:</b>
+  <%= @service.name %>
+</p>
+<p>
+  <%= image_tag(@media_asset.image, :alt => @media_asset.name, :class => 'thumb') %>
+</p>
+<p>
+  <b>Teammate:</b>
+  <ul>
+    <li><%= @teammate.fullname %></li>
+    <li>@<%= @teammate.twitter %></li>
+  </ul>
+</p>
+
+
+<%= link_to 'Edit', edit_work_path(@work) %> |
+<%= link_to 'Back', works_path %>

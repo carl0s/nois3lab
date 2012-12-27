@@ -1,0 +1,23 @@
+<h1>Listing media_assets</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @media_assets.each do |media_asset| %>
+  <tr>
+    <td><%= media_asset.name %></td>
+    <td><%= link_to 'Show', media_asset %></td>
+    <td><%= link_to 'Edit', edit_media_asset_path(media_asset) %></td>
+    <td><%= link_to 'Destroy', media_asset, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Media asset', new_media_asset_path %>

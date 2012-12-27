@@ -1,0 +1,37 @@
+<%= form_for(@teammate) do |f| %>
+  <% if @teammate.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@teammate.errors.count, "error") %> prohibited this teammate from being saved:</h2>
+
+      <ul>
+      <% @teammate.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :fullname %><br />
+    <%= f.text_field :fullname %>
+  </div>
+  <div class="field">
+    <%= f.label :bio %><br />
+    <%= f.text_area :bio %>
+  </div>
+  <div class="field">
+    <%= f.label :twitter %><br />
+    <%= f.text_field :twitter %>
+  </div>
+  <div class="field">
+    <%= f.label :facebook %><br />
+    <%= f.text_field :facebook %>
+  </div>
+  <div class="field">
+    <%= f.label :linkedin %><br />
+    <%= f.text_field :linkedin %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
