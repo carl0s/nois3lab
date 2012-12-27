@@ -75,6 +75,7 @@ SimpleNavigation::Configuration.run do |navigation|
   SimpleNavigation::Configuration.run do |navigation|
     navigation.items do |primary|
       primary.item :home, 'Home', root_path
+      # primary.item :about, 'About', about_path
       primary.item :works, 'Works', works_path
       primary.item :clients, 'Clients', clients_path
      end

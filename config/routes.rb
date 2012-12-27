@@ -16,6 +16,7 @@ Nois3lab::Application.routes.draw do
   resources :media_assets
 
   get "home/index"
+  get "about/index"
 
   resources :posts
 

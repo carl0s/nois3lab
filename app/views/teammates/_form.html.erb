@@ -31,6 +31,10 @@
     <%= f.label :linkedin %><br />
     <%= f.text_field :linkedin %>
   </div>
+  <div class="field">
+    <h2>Picture</h2>
+    <%= collection_select(:work, :media_id, MediaAsset.find(:all), :id, :name) %>
+  </div>
   <div class="row">
       <%= text_field_tag 'name', '', :autocomplete => autocomplete_tag_name_works_path %>
   </div>
