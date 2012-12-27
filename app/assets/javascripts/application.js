@@ -16,3 +16,12 @@
 //= require jquery-ui
 //= require autocomplete-rails
 //= require_tree .
+
+$(function () {
+  $('.media_item').click(function(e) {
+    $('.media_item').removeClass('selected');
+    $('#media_value').attr('value', $(this).find('img').attr('id'));
+    $(this).addClass('selected');
+    e.preventDefault();
+  })
+});

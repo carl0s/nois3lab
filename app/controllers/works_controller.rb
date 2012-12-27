@@ -35,7 +35,7 @@ class WorksController < ApplicationController
   # GET /works/new.json
   def new
     @work = Work.new
-
+    @media_asset = MediaAsset.all
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @work }
@@ -45,12 +45,14 @@ class WorksController < ApplicationController
   # GET /works/1/edit
   def edit
     @work = Work.find(params[:id])
+    @media_asset = MediaAsset.all
   end
 
   # POST /works
   # POST /works.json
   def create
     @work = Work.new(params[:work])
+    @media_asset = MediaAsset.all
 
     respond_to do |format|
       if @work.save
@@ -67,6 +69,8 @@ class WorksController < ApplicationController
   # PUT /works/1.json
   def update
     @work = Work.find(params[:id])
+    @media_asset = MediaAsset.all
+    @work.media_id = params[:media_value]
 
     respond_to do |format|
       if @work.update_attributes(params[:work])

@@ -19,6 +19,15 @@
     <%= f.label :content %><br />
     <%= f.text_area :content %>
   </div>
+  <div class="field">
+    <h2>Image</h2>
+    <%= hidden_field_tag :media_value, @work.media_id %>
+    <% @media_asset.each do |media| %>
+      <%= link_to "#", :id => media.name, :class => 'media_item' do %>
+        <%= image_tag(media.image.thumb, :alt => media.name, :id => media.id, :class => 'thumb', :size => '100x100') %>
+      <% end %>
+    <% end %>
+  </div>
   <div class="actions">
     <%= f.submit :class => 'button' %>
   </div>

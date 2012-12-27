@@ -33,7 +33,12 @@
   </div>
   <div class="field">
     <h2>Picture</h2>
-    <%= collection_select(:work, :media_id, MediaAsset.find(:all), :id, :name) %>
+    <%= hidden_field(:media, :value) %>
+    <% @media_asset.each do |media| %>
+      <%= link_to "#", :id => media.name, :class => 'media_item' do %>
+        <%= image_tag(media.image.thumb, :alt => media.name, :id => media.id, :class => 'thumb', :size => '100x100') %>
+      <% end %>
+    <% end %>
   </div>
   <div class="row">
       <%= text_field_tag 'name', '', :autocomplete => autocomplete_tag_name_works_path %>
