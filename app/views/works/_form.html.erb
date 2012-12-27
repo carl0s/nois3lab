@@ -25,6 +25,10 @@
     <%= collection_select(:work, :service_id, Service.find(:all), :id, :name) %>
   </div>
   <div class="row">
+      <%= text_field_tag 'name', '', :autocomplete => autocomplete_tag_name_works_path %>
+  </div>
+
+  <div class="row">
     <h2>Media assets</h2>
     <%= collection_select(:work, :media_id, MediaAsset.find(:all), :id, :name) %>
   </div>

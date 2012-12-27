@@ -1,4 +1,5 @@
 class TeammatesController < ApplicationController
+  autocomplete :tag, :name
   # GET /teammates
   # GET /teammates.json
   def index

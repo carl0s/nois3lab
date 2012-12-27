@@ -1,4 +1,10 @@
 Nois3lab::Application.routes.draw do
+  resources :works do
+    get :autocomplete_tag_name, :on => :collection
+  end
+
+  resources :tags
+
   resources :services
 
   resources :media_assets
@@ -11,7 +17,7 @@ Nois3lab::Application.routes.draw do
 
   resources :clients
 
-  resources :works
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

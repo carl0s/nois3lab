@@ -1,6 +1,8 @@
 class WorksController < ApplicationController
+  autocomplete :tag, :name
   # GET /works
   # GET /works.json
+
   def index
     @works = Work.all
 
