@@ -1,6 +1,6 @@
 <%= form_for(@client) do |f| %>
   <% if @client.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert-box">
       <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client from being saved:</h2>
 
       <ul>
