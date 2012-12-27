@@ -1,4 +1,8 @@
 Nois3lab::Application.routes.draw do
+  resources :event_details
+
+  resources :job_positions
+
   resources :skills
 
   resources :works do

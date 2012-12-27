@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @event_detail.name %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @event_detail.content %>
+</p>
+
+<p>
+  <b>Participants n:</b>
+  <%= @event_detail.participants_n %>
+</p>
+
+<p>
+  <b>Belongs to:</b>
+  <%= @event_detail.belongs_to %>
+</p>
+
+<p>
+  <b>Has one:</b>
+  <%= @event_detail.has_one %>
+</p>
+
+
+<%= link_to 'Edit', edit_event_detail_path(@event_detail) %> |
+<%= link_to 'Back', event_details_path %>

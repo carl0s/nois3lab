@@ -1,0 +1,31 @@
+<h1>Listing event_details</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Content</th>
+    <th>Participants n</th>
+    <th>Belongs to</th>
+    <th>Has one</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @event_details.each do |event_detail| %>
+  <tr>
+    <td><%= event_detail.name %></td>
+    <td><%= event_detail.content %></td>
+    <td><%= event_detail.participants_n %></td>
+    <td><%= event_detail.belongs_to %></td>
+    <td><%= event_detail.has_one %></td>
+    <td><%= link_to 'Show', event_detail %></td>
+    <td><%= link_to 'Edit', edit_event_detail_path(event_detail) %></td>
+    <td><%= link_to 'Destroy', event_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Event detail', new_event_detail_path %>
