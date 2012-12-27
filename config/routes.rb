@@ -1,4 +1,6 @@
 Nois3lab::Application.routes.draw do
+  resources :skills
+
   resources :works do
     get :autocomplete_tag_name, :on => :collection
   end

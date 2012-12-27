@@ -1,5 +1,6 @@
 class WorksController < ApplicationController
   autocomplete :tag, :name
+  autocomplete :skill, :name
   # GET /works
   # GET /works.json
 
