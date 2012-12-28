@@ -25,11 +25,7 @@
 </head>
 <body>
   <div class="container">
-    <div class="row">
-      <div class="twelve columns">
-        <div id='top_navigation'><%= render_navigation(:level => 1, :class => 'nav-bar') %></div>
-      </div>
-    </div>
+    <%= render "shared/menu" %>
     <div class="row">
       <%= yield %>
     </div>

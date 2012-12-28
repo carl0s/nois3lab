@@ -13,6 +13,13 @@
  *= require_tree .
  */
 
+#top_navigation ul li {
+  display: inline-block;
+  margin-right:30px;
+}
+
+/* File picker for administration */
+
 #picker a {
   display: inline-block;
   border:3px solid white;
