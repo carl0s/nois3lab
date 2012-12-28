@@ -18,6 +18,12 @@
 //= require_tree .
 
 $(function () {
+  var input_value = $('#media_value').attr('value');
+  $('.media_item').each(function () {
+    if($(this).find('img').attr('id') == input_value) {
+      $(this).addClass('selected');
+    }
+  });
   $('.media_item').click(function(e) {
     $('.media_item').removeClass('selected');
     $('#media_value').attr('value', $(this).find('img').attr('id'));

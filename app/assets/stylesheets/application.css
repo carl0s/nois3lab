@@ -12,3 +12,16 @@
  *= require foundation
  *= require_tree .
  */
+
+#picker a {
+  display: inline-block;
+  border:3px solid white;
+}
+
+#picker a.selected {
+  border:3px solid green;
+}
+
+#picker a:hover {
+  background: none;
+}
