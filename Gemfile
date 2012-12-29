@@ -7,8 +7,16 @@ gem 'rails', '3.2.8'
 
 gem 'sqlite3'
 
+gem 'ckeditor', '3.7.3'
+
 gem 'carrierwave'
-gem "simple-navigation", "~> 3.9.0"
+gem 'mini_magick'
+gem 'simple-navigation', '~> 3.9.0'
+
+# Auth
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+
 
 # Gems used only for assets and not required
 # in production environments by default.

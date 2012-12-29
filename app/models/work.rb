@@ -8,6 +8,10 @@ class Work < ActiveRecord::Base
   validates :teammate_id, :presence => true
   validates :service_id, :presence => true
   validates :client_id, :presence => true
+
+  def year
+    self[:year] || '2012'
+  end
 end
 
 
