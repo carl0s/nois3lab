@@ -1,4 +1,9 @@
 Nois3lab::Application.routes.draw do
+  devise_for :users
+
+  match '/auth/:provider/callback' => 'authentications#create'
+  # match '/logout' => 'authentications#destroy'
+
   resources :event_details
 
   resources :job_positions
