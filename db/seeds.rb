@@ -12,9 +12,9 @@ Tag.create(name: 'Wordpress')
 Tag.create(name: 'CMS')
 Tag.create(name: 'E-commerce')
 
-Service.create(name: 'web', content: 'dummy')
-Service.create(name: 'events', content: 'dummy')
-Service.create(name: 'communication', content: 'dummy')
+Service.create(name: 'web')
+Service.create(name: 'events')
+Service.create(name: 'communication')
 
 Teammate.create(fullname: 'Nome Cognome', bio: 'dummy bio', twitter: '@dummy', facebook: 'name.lastname', linkedin: 'test')
 

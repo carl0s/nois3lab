@@ -15,7 +15,6 @@
 //= require foundation
 //= require jquery-ui
 //= require autocomplete-rails
-//= require ckeditor/init
 //= require_tree .
 
 $(function () {
