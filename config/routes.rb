@@ -1,4 +1,8 @@
 Nois3lab::Application.routes.draw do
+  resources :items
+
+  resources :invoices
+
   devise_for :users
 
   match '/auth/:provider/callback' => 'authentications#create'
