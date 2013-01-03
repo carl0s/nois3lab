@@ -16,6 +16,6 @@ Service.create(name: 'web')
 Service.create(name: 'events')
 Service.create(name: 'communication')
 
-Teammate.create(fullname: 'Nome Cognome', bio: 'dummy bio', twitter: 'dummy', facebook: 'name.lastname', linkedin: 'test')
+Teammate.create(fullname: 'Carlo Frinolli', bio: 'dummy bio', twitter: 'carl0s_', facebook: 'carlo.frinolli', linkedin: 'carlofrinolli')
 
-Client.create(name: 'Test Client', content: 'Dummy content', url: 'http://www.example.com')
+Client.create(name: 'mozilla', content: 'Dummy content', url: 'http://www.mozilla.com')
