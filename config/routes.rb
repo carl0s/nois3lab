@@ -3,6 +3,8 @@ Nois3lab::Application.routes.draw do
 
   match '/auth/:provider/callback' => 'authentications#create'
   # match '/logout' => 'authentications#destroy'
+  match '/tags/:id' => 'tags#list'
+  mount Ckeditor::Engine => "/ckeditor"
 
   resources :event_details
 
@@ -11,7 +13,7 @@ Nois3lab::Application.routes.draw do
   resources :skills
 
   resources :works do
-    get :autocomplete_tag_name, :on => :collection
+    resources :tags
   end
 
   resources :tags

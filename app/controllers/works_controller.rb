@@ -17,6 +17,7 @@ class WorksController < ApplicationController
   # GET /works/1.json
   def show
     @work = Work.find(params[:id])
+    @tags = @work.tags
     @client_id = @work.client_id
     @client = Client.find(@client_id)
     @teammate_id = @work.teammate_id
@@ -35,6 +36,7 @@ class WorksController < ApplicationController
   # GET /works/new.json
   def new
     @work = Work.new
+    @tags = Tag.all
     @media_asset = MediaAsset.all
     respond_to do |format|
       format.html # new.html.erb
@@ -45,6 +47,7 @@ class WorksController < ApplicationController
   # GET /works/1/edit
   def edit
     @work = Work.find(params[:id])
+    @tags = Tag.all
     @media_asset = MediaAsset.all
   end
 
@@ -53,6 +56,17 @@ class WorksController < ApplicationController
   def create
     @work = Work.new(params[:work])
     @media_asset = MediaAsset.all
+
+    if params.include? 'tags'
+      params['tags'].each do |name|
+        next if name.empty?
+        tag = Tag.new
+        tag.name = name
+        tag.work_id = @work.id
+        tag.save!
+      end
+    end
+
 
     respond_to do |format|
       if @work.save
@@ -70,8 +84,18 @@ class WorksController < ApplicationController
   def update
     @work = Work.find(params[:id])
     @media_asset = MediaAsset.all
-    @work.media_id = params[:media_value]
+    # tag = Tag.new
+    # tag.work_id = params[:id]
+    # tag.name = params[:tag]
 
+    if params.include? 'tags'
+      tag = Tag.new
+      tag.name = params[:tags]
+      tag.work_id = @work.id
+      tag.save!
+    end
+
+    @work.media_id = params[:media_value]
     respond_to do |format|
       if @work.update_attributes(params[:work])
         format.html { redirect_to @work, notice: 'Work was successfully updated.' }
@@ -94,4 +118,23 @@ class WorksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # def add_tag
+  #   if request.request_method != 'POST'
+  #     render :json => false
+  #     return
+  #   end
+
+  #   if params.nil? or !params.include? "work_id" or !params.include? "tag"
+  #     render :json => false
+  #     return
+  #   end
+
+  #   tag = Tag.new
+  #   tag.work_id = params['work_id']
+  #   tag.name = params['tag_name']
+  #   render :json => tag.save!
+  # end
+
+
 end

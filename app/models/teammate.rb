@@ -6,4 +6,8 @@ class Teammate < ActiveRecord::Base
   has_one :job_position
 
   validates :fullname, :presence => true
+
+  extend FriendlyId
+  friendly_id :fullname, :use => :slugged
+
 end

@@ -10,6 +10,8 @@
  *
  *= require_self
  *= require foundation
+ *= require jquery.tagit
+ *= require tagit.ui-zendesk
  *= require_tree .
  */
 
@@ -31,4 +33,8 @@
 
 #picker a:hover {
   background: none;
+}
+
+#preloadedTags {
+  display: none;
 }

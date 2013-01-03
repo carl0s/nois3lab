@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
 
   has_many :authentications, :dependent => :delete_all
 
+  extend FriendlyId
+  friendly_id :name, :use => :slugged
+
   def apply_omniauth(auth)
     # In previous omniauth, 'user_info' was used in place of 'raw_info'
     self.email = auth['extra']['raw_info']['email']

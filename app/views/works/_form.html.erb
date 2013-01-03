@@ -33,19 +33,39 @@
   </div>
   <div class="field">
     <%= f.label :content %><br />
-    <%= f.text_area :content %>
+    <%= f.cktext_area :content, :input_html => { :value => @work.content } %>
+  </div>
+  <script>
+     var sampleTags = [
+     <% @tags.each do |tag| %>
+      '<%= tag.name %>',
+     <% end %>
+     ]
+  </script>
+
+  <div class="field" id="tags">
+    <h2>Tags</h2>
+    <input id="preloadedTags" value="<% @work.tags.each do |worktag| %><%= worktag.name %>,<% end %>" />
+    <ul>
+    </ul>
   </div>
 
+  <script>
+    // function add_tag() {
+    //   var tags = document.getElementById('tags');
+    //   var input = document.createElement('input');
+    //   input.setAttribute('type', 'text');
+    //   input.setAttribute('name', 'tags[]');
+    //   input.setAttribute('onchange', 'add_tag()');
+    //   tags.appendChild(input);
+    // }
+    // add_tag();
+  </script>
   <div class="field">
     <h2>Service</h2>
     <%= collection_select(:work, :service_id, Service.find(:all), :id, :name) %>
 
   </div>
-  <div class="field">
-    <h2>Tags</h2>
-    <%= text_field_tag 'name', '', :autocomplete => autocomplete_tag_name_works_path %>
-  </div>
-
   <div class="field">
     <h2>Images</h2>
     <%= render "media_assets/picker" %>

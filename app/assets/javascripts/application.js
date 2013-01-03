@@ -15,7 +15,10 @@
 //= require foundation
 //= require jquery-ui
 //= require autocomplete-rails
+//= require ckeditor/init
+//= require tag-it.min
 //= require_tree .
+
 
 $(function () {
   var input_value = $('#media_value').attr('value');
@@ -29,5 +32,18 @@ $(function () {
     $('#media_value').attr('value', $(this).find('img').attr('id'));
     $(this).addClass('selected');
     e.preventDefault();
-  })
+  });
+
+  $('#tags ul').tagit({
+                availableTags: sampleTags,
+                allowSpaces: true,
+                singleField: true,
+                singleFieldNode: $('#preloadedTags'),
+                onTagExists: function(evt, ui) {
+                    addEvent('onTagExists: ' + eventTags.tagit('tagLabel', ui.existingTag));
+                }
+
+            });
+
+
 });

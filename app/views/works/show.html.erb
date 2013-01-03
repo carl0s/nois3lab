@@ -1,34 +1,37 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="eight columns">
+    <h2><%= @work.name %></h2>
+    <ul>
+      <li><%= @service.name %></li>
+    </ul>
+    <figure>
+      <%= image_tag(@media_asset.image.thumb, :alt => @media_asset.name, :class => 'thumb') %>
+    </figure>
+    <div class="content">
+      <%= @work.content.html_safe %>
+    </div>
+    <div class="who_helped">
+      <h3>Teammate:</h3>
+      <ul>
+        <li><%= @teammate.fullname %></li>
+        <li><%= @teammate.twitter %></li>
+      </ul>
+    </div>
+    <div class="tags">
+      <ul>
+        <% @work.tags.each do |tag| %>
+        <li><%= link_to tag.name, tag_path(tag.id) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 
-<p>
-  <b>Name:</b>
-  <%= @work.name %>
-</p>
-
-<p>
-  <b>Content:</b>
-  <%= @work.content %>
-</p>
-<p>
-  <b>Client:</b>
-  <%= @client.name %>
-</p>
-<p>
-  <b>Service:</b>
-  <%= @service.name %>
-</p>
-<p>
-  <%= image_tag(@media_asset.image.thumb, :alt => @media_asset.name, :class => 'thumb') %>
-</p>
-<p>
-  <b>Teammate:</b>
-  <ul>
-    <li><%= @teammate.fullname %></li>
-    <li><%= @teammate.twitter %></li>
-  </ul>
-</p>
-
-
+  <div class="four columns">
+      <h3><%= @client.name %></h3>
+      <h3><%= @work.year %></h3>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_work_path(@work) %> |
 <%= link_to 'Back', works_path %>

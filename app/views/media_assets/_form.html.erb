@@ -15,6 +15,10 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+  <div class="field">
+    <%= f.label :category %><br />
+    <%= f.text_field :category %>
+  </div>
   <div class="preview">
     <%= image_tag(@media_asset.image, :size => '50x50', :alt => @media_asset.name, :class => 'thumb') %>
   </div>

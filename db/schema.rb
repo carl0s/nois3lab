@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121229151413) do
+ActiveRecord::Schema.define(:version => 20130102222049) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -29,7 +29,10 @@ ActiveRecord::Schema.define(:version => 20121229151413) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "media_id"
+    t.string   "slug"
   end
+
+  add_index "clients", ["slug"], :name => "index_clients_on_slug", :unique => true
 
   create_table "event_details", :force => true do |t|
     t.string   "name"
@@ -51,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20121229151413) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "image"
+    t.integer  "category"
   end
 
   create_table "posts", :force => true do |t|
@@ -59,14 +63,20 @@ ActiveRecord::Schema.define(:version => 20121229151413) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "teammate_id"
+    t.string   "slug"
   end
+
+  add_index "posts", ["slug"], :name => "index_posts_on_slug", :unique => true
 
   create_table "services", :force => true do |t|
     t.string   "name"
     t.text     "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "slug"
   end
+
+  add_index "services", ["slug"], :name => "index_services_on_slug", :unique => true
 
   create_table "skills", :force => true do |t|
     t.string   "name"
@@ -75,11 +85,29 @@ ActiveRecord::Schema.define(:version => 20121229151413) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context"
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
   create_table "tags", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "work_id"
+    t.string   "slug"
   end
+
+  add_index "tags", ["slug"], :name => "index_tags_on_slug", :unique => true
+  add_index "tags", ["work_id"], :name => "index_tags_on_work_id"
 
   create_table "teammates", :force => true do |t|
     t.string   "fullname"
@@ -96,7 +124,10 @@ ActiveRecord::Schema.define(:version => 20121229151413) do
     t.integer  "post_id"
     t.integer  "year"
     t.integer  "media_id"
+    t.string   "slug"
   end
+
+  add_index "teammates", ["slug"], :name => "index_teammates_on_slug", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -111,10 +142,12 @@ ActiveRecord::Schema.define(:version => 20121229151413) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "slug"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true
 
   create_table "works", :force => true do |t|
     t.string   "name"
@@ -131,6 +164,9 @@ ActiveRecord::Schema.define(:version => 20121229151413) do
     t.integer  "event_id"
     t.integer  "cover_image"
     t.integer  "year"
+    t.string   "slug"
   end
+
+  add_index "works", ["slug"], :name => "index_works_on_slug", :unique => true
 
 end

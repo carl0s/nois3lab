@@ -40,7 +40,21 @@ class TagsController < ApplicationController
   # POST /tags
   # POST /tags.json
   def create
-    @tag = Tag.new(params[:tag])
+    @tag = Tag.new(params[:tags])
+    # @work = Work.find(params[:work_id])
+    # @tag = @work.tags.create(params[:tag])
+    # if @tag.errors.any?
+    #   flash[:notice] = "Error... foo"
+    # end
+    # redirect_to work_path(@work)
+    # @work = Work.find(params[:work_id])
+    # @tag = @work.tags.create(params[:tag])
+
+    # if @tag.errors.any?
+    #   flash[:notice] = "Error... foo"
+    # end
+    # redirect_to work_path(@work)
+
 
     respond_to do |format|
       if @tag.save
@@ -78,6 +92,15 @@ class TagsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tags_url }
       format.json { head :no_content }
+    end
+  end
+
+  def list
+    @work = Work.find(params[:work_id])
+    @tag = Tag.find(params[:id])
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @tag }
     end
   end
 end

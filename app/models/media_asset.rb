@@ -1,5 +1,5 @@
 class MediaAsset < ActiveRecord::Base
-  attr_accessible :name, :image, :image_cache
+  attr_accessible :name, :image, :image_cache, :category
   mount_uploader :image, MediaAssetUploader
   has_many :works
   has_many :teammates

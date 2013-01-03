@@ -7,8 +7,17 @@ gem 'rails', '3.2.8'
 
 gem 'sqlite3'
 
+gem 'rocket_tag'
+gem 'select2-rails'
+
+gem 'ckeditor', '3.7.3'
+
+gem "friendly_id", "~> 4.0.1"
+
 gem 'carrierwave'
-gem "simple-navigation", "~> 3.9.0"
+gem 'mini_magick'
+
+gem 'simple-navigation', '~> 3.9.0'
 
 gem 'devise'
 gem 'omniauth'
