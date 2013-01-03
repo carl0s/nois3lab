@@ -45,8 +45,10 @@
 
   <div class="field" id="tags">
     <h2>Tags</h2>
-    <input id="preloadedTags" value="<% @work.tags.each do |worktag| %><%= worktag.name %>,<% end %>" />
     <ul>
+      <% @work.tags.each do |worktag| %>
+        <li><%= worktag.name %></li>
+      <% end %>
     </ul>
   </div>
 

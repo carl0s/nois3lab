@@ -37,8 +37,8 @@ $(function () {
   $('#tags ul').tagit({
                 availableTags: sampleTags,
                 allowSpaces: true,
-                singleField: true,
-                singleFieldNode: $('#preloadedTags'),
+                itemName: 'item',
+                fieldName: 'tags',
                 onTagExists: function(evt, ui) {
                     addEvent('onTagExists: ' + eventTags.tagit('tagLabel', ui.existingTag));
                 }
