@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130103162329) do
+ActiveRecord::Schema.define(:version => 20130104140432) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -34,12 +34,41 @@ ActiveRecord::Schema.define(:version => 20130103162329) do
 
   add_index "clients", ["slug"], :name => "index_clients_on_slug", :unique => true
 
+  create_table "companies", :force => true do |t|
+    t.string "name"
+    t.string "address"
+    t.string "address_2"
+    t.string "email"
+    t.string "phone"
+    t.string "city"
+    t.string "zipcode"
+    t.text   "country"
+    t.string "vat"
+    t.string "fiscal"
+    t.string "iban"
+    t.string "swift"
+    t.string "timestamps"
+  end
+
+  create_table "discounts", :force => true do |t|
+    t.integer  "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "event_details", :force => true do |t|
     t.string   "name"
     t.text     "content"
     t.integer  "participants_n"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+  end
+
+  create_table "invoice_numbers", :force => true do |t|
+    t.integer  "year"
+    t.integer  "number"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "invoices", :force => true do |t|
@@ -58,6 +87,11 @@ ActiveRecord::Schema.define(:version => 20130103162329) do
     t.integer  "invoice_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "quantity"
+    t.float    "unit_price"
+    t.integer  "discount"
+    t.float    "total_price"
+    t.float    "total"
   end
 
   create_table "job_positions", :force => true do |t|
@@ -126,6 +160,14 @@ ActiveRecord::Schema.define(:version => 20130103162329) do
 
   add_index "tags", ["slug"], :name => "index_tags_on_slug", :unique => true
   add_index "tags", ["work_id"], :name => "index_tags_on_work_id"
+
+  create_table "taxes", :force => true do |t|
+    t.string   "name"
+    t.integer  "value"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "teammates", :force => true do |t|
     t.string   "fullname"

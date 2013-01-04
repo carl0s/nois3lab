@@ -41,7 +41,11 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = Item.new(params[:item])
-
+    @item.name = params[:name]
+    @item.quantity = params[:quantity]
+    @item.unit_price = params[:unit_price]
+    @item.total_price = params[:total]
+    @item.discount = params[:discount]
     respond_to do |format|
       if @item.save
         format.html { redirect_to @item, notice: 'Item was successfully created.' }

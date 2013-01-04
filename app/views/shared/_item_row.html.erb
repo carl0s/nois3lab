@@ -1,0 +1,40 @@
+    <tr class="item hidden">
+      <td>
+        <%= text_field_tag 'name', nil, :placeholder => 'Insert your item name' %>
+      </td>
+      <td>
+        <%= select_tag "count", "<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>".html_safe %>
+      </td>
+      <td>
+        <%= text_field_tag 'unit_price', nil, :placeholder => 'Unit price', :size => 6, :class => 'unit_price' %>
+      </td>
+      <td>
+        <%= select_tag "discount", options_from_collection_for_select(@discounts, "value", "value"), :prompt => "no discount" %>
+      </td>
+      <td class="total">
+        <span></span> €
+      </td>
+      <td class="add_item">
+        <a href="#">add</a>
+      </td>
+    </tr>
+    <tr id="item_<%=@item_id.id %>">
+      <td>
+        <%= text_field_tag 'name', nil, :placeholder => 'Insert your item name' %>
+      </td>
+      <td>
+        <%= select_tag "count", "<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>".html_safe %>
+      </td>
+      <td>
+        <%= text_field_tag 'unit_price', nil, :placeholder => 'Unit price', :size => 6, :class => 'unit_price' %>
+      </td>
+      <td>
+        <%= select_tag "discount", options_from_collection_for_select(@discounts, "value", "value"), :prompt => "no discount" %>
+      </td>
+      <td class="total">
+        <span></span> €
+      </td>
+      <td class="add_item">
+        <a href="#">add</a>
+      </td>
+    </tr>

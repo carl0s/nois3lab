@@ -1,4 +1,10 @@
 Nois3lab::Application.routes.draw do
+  resources :discounts
+
+  resources :taxes
+
+  resources :companies
+
   resources :items
 
   resources :invoices
@@ -8,6 +14,8 @@ Nois3lab::Application.routes.draw do
   match '/auth/:provider/callback' => 'authentications#create'
   # match '/logout' => 'authentications#destroy'
   match '/tags/:id' => 'tags#list'
+  match '/add_item' => 'items#create'
+
   mount Ckeditor::Engine => "/ckeditor"
 
   resources :event_details

@@ -11,6 +11,9 @@
     </div>
   <% end %>
 
+  <div class="fied">
+    <h2><%= @invoice.invoice_n %></h2>
+  </div>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
@@ -23,6 +26,24 @@
     <%= f.label :doc_id %><br />
     <%= f.number_field :doc_id %>
   </div>
+  <div class="field">
+    <%= f.label :client_id %><br />
+    <%= select_tag "clients", options_from_collection_for_select(@clients, "id", "name"), :prompt => "Select something" %>
+  </div>
+  <table class="items">
+    <tr>
+      <th>name</th>
+      <th>quantity</th>
+      <th>unit price</th>
+      <th>discount</th>
+      <th>total price</th>
+      <th></th>
+    </tr>
+    <% # @item.each do |t| %>
+      <% # render "shared/edit_item_row" %>
+    <% # end %>
+    <%= render "shared/item_row" %>
+  </table>
   <div class="actions">
     <%= f.submit %>
   </div>

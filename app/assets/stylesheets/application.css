@@ -38,3 +38,7 @@
 #preloadedTags {
   display: none;
 }
+
+.hidden {
+  display: none;
+}

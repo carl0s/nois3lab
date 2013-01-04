@@ -25,7 +25,28 @@ class InvoicesController < ApplicationController
   # GET /invoices/new.json
   def new
     @invoice = Invoice.new
+    @clients = Client.find(:all)
+    @discounts = Discount.find(:all)
+    @taxes = Taxis.find(:all)
+    @counter = InvoiceNumbers.first
+    if !params[:invoice_id].nil?
+      @item = Item.find(params[:invoice_id])
+    end
+    @item_id = Item.last
+    if !@item_id.nil?
+      @item_id = Item.last
+    else
+      @item_id = 1
+    end
+    if @counter.year != Date.today.year
+      @counter.year = Date.today.year
+      @counter.number = 0
+    end
 
+    @counter.number += 1
+    @counter.save!
+
+    @invoice.invoice_n = 'n3-' + @counter.year.to_s + '-' + @counter.number.to_s
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @invoice }
@@ -35,6 +56,12 @@ class InvoicesController < ApplicationController
   # GET /invoices/1/edit
   def edit
     @invoice = Invoice.find(params[:id])
+    @clients = Client.find(:all)
+    if !params[:invoice_id].nil?
+      @item = Item.find(params[:invoice_id])
+    end
+    @discounts = Discount.find(:all)
+    @taxes = Taxis.find(:all)
   end
 
   # POST /invoices
@@ -80,4 +107,5 @@ class InvoicesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end
