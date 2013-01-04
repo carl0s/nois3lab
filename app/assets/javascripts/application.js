@@ -45,40 +45,73 @@ $(function () {
     }
   });
 
-  $('.item').find('.unit_price').change(function () {
-    if($('.item_1 input[name]').attr('value') == '') {
-      $('.item_1 input[name]').addClass('error');
+  var name = $('.item .changeable').parents('input[name]').attr('value');
+  var total_price = $('.item .changeable').parents('.item').find('.total span');
+  var unit_price = $('.item .changeable').parents('.item').find('#unit_price').attr('value');
+  var quantity =  $('.item .changeable').parents('.item').find('#count option:selected').attr('value');
+  var total = unit_price * quantity;
+  var discount_value = $('.item .changeable').parents('.item').find('#discount option:selected').attr('value');
+  var discount = discount_value / 100;
+  var temp = 1 - discount;
+  var discounted_total = (total * temp).toFixed(2);
+
+  $('.item .changeable').live('change', function () {
+    if($(this).parents('.item').find('input[name]').attr('value') == '') {
+      $(this).parents('.item').find('input[name]').addClass('error');
     }
-    var total_price = $('.item .total span');
-    var unit_price = $('.item #unit_price').attr('value');
-    var quantity = $('.item  #count option:selected').attr('value');
+    var total_price = $(this).parents('.item').find('.total span');
+    var unit_price = $(this).parents('.item').find('#unit_price').attr('value');
+    var quantity = $(this).parents('.item').find('#count option:selected').attr('value');
     var total = unit_price * quantity;
-    var discount_value = $('.item #discount option:selected').attr('value');
+    var discount_value = $(this).parents('.item').find('#discount option:selected').attr('value');
     var discount = discount_value / 100;
-    var temp = 1 - Math.round(discount);
-    var discounted_total = total * temp;
+    var temp = 1 - discount;
+    var discounted_total = (total * temp).toFixed(2);
     total_price.html(discounted_total);
   });
 
-  $('.add_item a').live('click', function(e) {
-    var total_price = $('.item .total span');
-    var unit_price = $('.item #unit_price').attr('value');
-    var quantity = $('.item  #count option:selected').attr('value');
-    var total = unit_price * quantity;
-    var discount_value = $('.item #discount option:selected').attr('value');
-    var discount = discount_value / 100;
-    var temp = 1 - Math.round(discount);
-    var discounted_total = total * temp;
-    $.post('/add_item', {
-                          invoice_id: $('#invoice_id').attr('value'),
-                          name: $('.item input[name]').attr('value'),
-                          quantity: quantity,
-                          unit_price: unit_price,
-                          discount: discount_value,
-                          total: discounted_total
-                       });
-    $('tr.item.hidden').clone().insertAfter('.item:last').removeClass('hidden');
+  $('.item .add_item').live('click', function(e) {
     e.preventDefault();
+    var name = $(this).parents('.item').find('input#name').attr('value');
+    var total_price = $(this).parents('.item').find('.total span');
+    var unit_price = $(this).parents('.item').find('#unit_price').attr('value');
+    var quantity =  $(this).parents('.item').find('#count option:selected').attr('value');
+    var total = unit_price * quantity;
+    var discount_value = $(this).parents('.item').find('#discount option:selected').attr('value');
+    var discount = discount_value / 100;
+    var temp = 1 - discount;
+    var discounted_total = (total * temp).toFixed(2);
+
+    if( discounted_total != 0 && name) {
+      $(this).addClass('hidden');
+      $.post('/add_item', {
+                            invoice_id: $('#invoice_id').html(),
+                            name:  name,
+                            quantity: quantity,
+                            unit_price: unit_price,
+                            discount: discount_value,
+                            total: discounted_total
+      });
+      //  .success(
+      //   function() {
+      //     $('tr.placeholder').html(<%= escape_javascript(render :partial => 'share/item_row', :locals => {:items => current_item.id} ) %>)
+      // });
+      // $('tr.item.hidden').clone().insertAfter('.item:last').removeClass('hidden');
+      // $('.remove_item').removeClass('hidden');
+      // $('.item:last input["name"]').attr('value','');
+      // $('.item:last .total span').html('0');
+      // $('.item:last #unit_price').attr('value','');
+      // $('.item:last  #count option:selected').attr('value','');
+      // $('.item:last #discount option:selected').attr('value','');
+    } else {
+      alert('please fill up values');
+    }
   });
+
+  $('.item .remove_item').live('click', function(e) {
+    e.preventDefault();
+    $.post('/remove_item');
+    $(this).parents('.item').remove();
+  })
 
 });

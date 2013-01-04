@@ -3,4 +3,9 @@ class Invoice < ActiveRecord::Base
   belongs_to :client
   has_many :items
 
+  validates :name, :presence => true
+  validates :client_id, :presence => true
+
+
+
 end

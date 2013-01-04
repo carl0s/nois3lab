@@ -42,14 +42,19 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(params[:item])
     @item.name = params[:name]
+    @item.invoice_id = params[:invoice_id]
     @item.quantity = params[:quantity]
     @item.unit_price = params[:unit_price]
     @item.total_price = params[:total]
     @item.discount = params[:discount]
+    @clients = Client.find(:all)
+    @discounts = Discount.find(:all)
+    @taxes = Taxis.find(:all)
+    @item.save!
     respond_to do |format|
       if @item.save
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
         format.json { render json: @item, status: :created, location: @item }
+        format.html { redirect_to @item, notice: 'Item was successfully created.' }
       else
         format.html { render action: "new" }
         format.json { render json: @item.errors, status: :unprocessable_entity }

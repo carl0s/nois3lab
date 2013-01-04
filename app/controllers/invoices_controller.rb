@@ -29,15 +29,7 @@ class InvoicesController < ApplicationController
     @discounts = Discount.find(:all)
     @taxes = Taxis.find(:all)
     @counter = InvoiceNumbers.first
-    if !params[:invoice_id].nil?
-      @item = Item.find(params[:invoice_id])
-    end
-    @item_id = Item.last
-    if !@item_id.nil?
-      @item_id = Item.last
-    else
-      @item_id = 1
-    end
+    @items = @invoice.items
     if @counter.year != Date.today.year
       @counter.year = Date.today.year
       @counter.number = 0
@@ -57,9 +49,7 @@ class InvoicesController < ApplicationController
   def edit
     @invoice = Invoice.find(params[:id])
     @clients = Client.find(:all)
-    if !params[:invoice_id].nil?
-      @item = Item.find(params[:invoice_id])
-    end
+    @items = @invoice.items
     @discounts = Discount.find(:all)
     @taxes = Taxis.find(:all)
   end

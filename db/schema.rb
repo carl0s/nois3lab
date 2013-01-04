@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130104140432) do
+ActiveRecord::Schema.define(:version => 20130104155943) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -93,6 +93,8 @@ ActiveRecord::Schema.define(:version => 20130104140432) do
     t.float    "total_price"
     t.float    "total"
   end
+
+  add_index "items", ["invoice_id"], :name => "index_items_on_invoice_id"
 
   create_table "job_positions", :force => true do |t|
     t.string   "name"

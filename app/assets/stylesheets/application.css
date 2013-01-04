@@ -42,3 +42,7 @@
 .hidden {
   display: none;
 }
+
+input.error {
+  border:1px solid #ff0000;
+}
