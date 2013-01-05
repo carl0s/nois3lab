@@ -91,20 +91,15 @@ $(function () {
                             unit_price: unit_price,
                             discount: discount_value,
                             total: discounted_total
+      })
+       .success(
+        function() {
+          $('.alert-box').addClass('success');
+          $('.alert-box .notice').html('Added with success');
       });
-      //  .success(
-      //   function() {
-      //     $('tr.placeholder').html(<%= escape_javascript(render :partial => 'share/item_row', :locals => {:items => current_item.id} ) %>)
-      // });
-      // $('tr.item.hidden').clone().insertAfter('.item:last').removeClass('hidden');
-      // $('.remove_item').removeClass('hidden');
-      // $('.item:last input["name"]').attr('value','');
-      // $('.item:last .total span').html('0');
-      // $('.item:last #unit_price').attr('value','');
-      // $('.item:last  #count option:selected').attr('value','');
-      // $('.item:last #discount option:selected').attr('value','');
     } else {
-      alert('please fill up values');
+      $('.alert-box').addClass('error');
+      $('.alert-box .notice').html('please fill up all requested values');
     }
   });
 

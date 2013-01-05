@@ -1,0 +1,3 @@
+  alert('a');
+  data = "<%= escape_javascript(render(:partial => 'shared/item_row')) %>";
+  $(data).insertAfter('.item:last');

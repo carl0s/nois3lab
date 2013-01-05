@@ -53,8 +53,10 @@ class ItemsController < ApplicationController
     @item.save!
     respond_to do |format|
       if @item.save
+        format.js { render :action => 'add_row' }
         format.json { render json: @item, status: :created, location: @item }
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
+
       else
         format.html { render action: "new" }
         format.json { render json: @item.errors, status: :unprocessable_entity }

@@ -29,16 +29,16 @@ class InvoicesController < ApplicationController
     @discounts = Discount.find(:all)
     @taxes = Taxis.find(:all)
     @counter = InvoiceNumbers.first
-    @items = @invoice.items
     if @counter.year != Date.today.year
       @counter.year = Date.today.year
       @counter.number = 0
     end
 
     @counter.number += 1
-    @counter.save!
 
     @invoice.invoice_n = 'n3-' + @counter.year.to_s + '-' + @counter.number.to_s
+    invoice_id = @invoice.invoice_n
+    @items_invoiced = Item.find_by_invoice_id(invoice_id)
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @invoice }
@@ -58,6 +58,8 @@ class InvoicesController < ApplicationController
   # POST /invoices.json
   def create
     @invoice = Invoice.new(params[:invoice])
+    @counter = InvoiceNumbers.first
+    @counter.save!
 
     respond_to do |format|
       if @invoice.save
@@ -96,6 +98,11 @@ class InvoicesController < ApplicationController
       format.html { redirect_to invoices_url }
       format.json { head :no_content }
     end
+  end
+
+  def remove_item
+    @item = Item.find(params[:id])
+    @item.destroy
   end
 
 end

@@ -19,6 +19,11 @@ gem 'mini_magick'
 
 gem 'simple-navigation', '~> 3.9.0'
 
+# API External services
+
+gem 'tumblr_client'
+gem 'behance'
+
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
