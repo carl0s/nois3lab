@@ -8,9 +8,6 @@
   <td>
     <%= text_field_tag 'unit_price', nil, :placeholder => 'Unit price', :size => 6, :class => 'unit_price changeable' %>
   </td>
-  <td>
-    <%= select_tag "discount", options_from_collection_for_select(@discounts, "value", "value"), :prompt => "no discount", :class=> 'changeable' %>
-  </td>
   <td class="total">
     <span>0</span> €
   </td>

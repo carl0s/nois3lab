@@ -45,7 +45,6 @@ class ItemsController < ApplicationController
     @item.invoice_id = params[:invoice_id]
     @item.quantity = params[:quantity]
     @item.unit_price = params[:unit_price]
-    @item.total_price = params[:total]
     @item.discount = params[:discount]
     @clients = Client.find(:all)
     @discounts = Discount.find(:all)
@@ -68,6 +67,7 @@ class ItemsController < ApplicationController
   # PUT /items/1.json
   def update
     @item = Item.find(params[:id])
+    @item.invoice_id = params[:invoice_id]
 
     respond_to do |format|
       if @item.update_attributes(params[:item])

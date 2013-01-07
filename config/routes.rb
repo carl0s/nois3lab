@@ -11,11 +11,11 @@ Nois3lab::Application.routes.draw do
 
   devise_for :users
 
+  match '/add_item' => 'items#create'
+  match '/remove_item/:id' => 'invoices#remove_item'
   match '/auth/:provider/callback' => 'authentications#create'
   # match '/logout' => 'authentications#destroy'
   match '/tags/:id' => 'tags#list'
-  match '/add_item' => 'items#create'
-  match '/remove_item/:id' => 'invoices#remove_item'
 
   mount Ckeditor::Engine => "/ckeditor"
 

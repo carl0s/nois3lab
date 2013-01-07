@@ -31,4 +31,4 @@ Discount.create(value:'30')
 Discount.create(value:'40')
 Discount.create(value:'50')
 
-InvoiceNumbers.create(number: '1', year:Date.today.year)
+InvoiceNumbers.create(year:Date.today.year, number: 0)

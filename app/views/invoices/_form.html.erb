@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="fied">
-    <h2 id="invoice_id"><%= @invoice.invoice_n %></h2>
+    <h2 id="invoice_id"><%= @invoice.invoice_number %></h2>
   </div>
   <div class="field">
     <%= f.label :name %><br />
@@ -28,21 +28,54 @@
   </div>
   <div class="field">
     <%= f.label :client_id %><br />
-    <%= select_tag "clients", options_from_collection_for_select(@clients, "id", "name"), :prompt => "Select something" %>
+    <%= select_tag "clients", options_from_collection_for_select(@invoice.clients, "id", "name", @invoice.client_id),  :prompt => "Select something" %>
   </div>
   <table class="items">
     <tr>
       <th>name</th>
       <th>quantity</th>
       <th>unit price</th>
-      <th>discount</th>
       <th>total price</th>
       <th></th>
     </tr>
+    <%= debug @invoice.invoice_id %>
+    <% @invoice.items.each do |t| %>
+        <tr class="item">
+          <td>
+            <%= text_field_tag 'name', nil, :disabled => true, :placeholder => 'Insert your item name', :value => t.name,  :class=> 'changeable' %>
+          </td>
+          <td>
+            <%= select_tag "count", "<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>".html_safe, :disabled => true, :class=> 'changeable' %>
+          </td>
+          <td>
+            <%= text_field_tag 'unit_price', nil, :disabled => true, :placeholder => 'Unit price', :value => t.unit_price, :size => 6, :class => 'unit_price changeable' %>
+          </td>
 
+          <td class="total">
+            <span><%= total %></span> €
+          </td>
+          <td>
+            <a href="#" class="edit_item">edit</a>
+            <a href="#" class="remove_item" id="item_<%= t.id %>">remove</a>
+          </td>
+        </tr>
+    <% end %>
     <%= render "shared/item_row" %>
   </table>
+  <div class="field">
+
+  </div>
+  <div class="field">
+
+  </div>
+  <div class="field">
+    <h4 id="subtotal">subtotal <span><%= @invoice.subtotal %></span> €</h4>
+    <div class="field">discount <%= f.collection_select :discount_id, @invoice.discounts, :id, :value %> %</div>
+    <h3 id="total"></h3>
+    <div class="field">tax amount <%= f.collection_select :tax_id, @invoice.taxes, :id, :value %> %</div>
+    <h3 id="grand_total"></h3>
+  </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class=> 'button'%>
   </div>
 <% end %>

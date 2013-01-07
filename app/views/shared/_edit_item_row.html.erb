@@ -1,8 +1,22 @@
-    <tr class="items">
-      <td><%= t.name %></td>
-      <td><%= t.quantity %></td>
-      <td><%= t.unit_price %></td>
-      <td><%= t.discount %></td>
-      <td><%= t.total_price %></td>
-      <td><a href="#">remove</a></td>
+    <%= debug @items %>
+    <tr class="item">
+      <td>
+        <%= text_field_tag 'name', nil, :placeholder => 'Insert your item name', :value => :name, :class=> 'changeable' %>
+      </td>
+      <td>
+        <%= select_tag "count", "<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>".html_safe, :class=> 'changeable' %>
+      </td>
+      <td>
+        <%= text_field_tag 'unit_price', nil, :placeholder => 'Unit price', :size => 6, :class => 'unit_price changeable' %>
+      </td>
+      <td>
+        <%= select_tag "discount", options_from_collection_for_select(@discounts, "value", "value"), :prompt => "no discount", :class=> 'changeable' %>
+      </td>
+      <td class="total">
+        <span>0</span> €
+      </td>
+      <td>
+        <a href="#" class="add_item">add</a>
+        <a href="#" class="remove_item">remove</a>
+      </td>
     </tr>

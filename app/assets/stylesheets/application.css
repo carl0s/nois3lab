@@ -43,6 +43,14 @@
   display: none;
 }
 
+div.field input,
+div.field textarea {
+}
+
 input.error {
   border:1px solid #ff0000;
+}
+
+.alert-box {
+  position: fixed;
 }

@@ -10,14 +10,21 @@ class InvoicesController < ApplicationController
     end
   end
 
+
   # GET /invoices/1
   # GET /invoices/1.json
   def show
+    @company = Company.first
     @invoice = Invoice.find(params[:id])
+    @invoice.client = Client.find(@invoice.client_id)
+    @invoice.items = Item.find :all, :conditions => [ 'invoice_id = ?', @invoice.invoice_number ]
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @invoice }
+      format.pdf do
+        render :pdf => "file_name"
+      end
     end
   end
 
@@ -25,20 +32,8 @@ class InvoicesController < ApplicationController
   # GET /invoices/new.json
   def new
     @invoice = Invoice.new
-    @clients = Client.find(:all)
-    @discounts = Discount.find(:all)
-    @taxes = Taxis.find(:all)
-    @counter = InvoiceNumbers.first
-    if @counter.year != Date.today.year
-      @counter.year = Date.today.year
-      @counter.number = 0
-    end
 
-    @counter.number += 1
-
-    @invoice.invoice_n = 'n3-' + @counter.year.to_s + '-' + @counter.number.to_s
-    invoice_id = @invoice.invoice_n
-    @items_invoiced = Item.find_by_invoice_id(invoice_id)
+    # @invoice.subtotal = Item.sum :total_price, :conditions => [ 'invoice_id = ?', @invoice.invoice_number ]
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @invoice }
@@ -48,8 +43,9 @@ class InvoicesController < ApplicationController
   # GET /invoices/1/edit
   def edit
     @invoice = Invoice.find(params[:id])
+    @invoice.items = Item.find :all, :conditions => [ 'invoice_id = ?', @invoice.invoice_id ]
+
     @clients = Client.find(:all)
-    @items = @invoice.items
     @discounts = Discount.find(:all)
     @taxes = Taxis.find(:all)
   end
@@ -57,9 +53,13 @@ class InvoicesController < ApplicationController
   # POST /invoices
   # POST /invoices.json
   def create
+
     @invoice = Invoice.new(params[:invoice])
-    @counter = InvoiceNumbers.first
-    @counter.save!
+    @invoice.client_id = params[:clients]
+    @invoice.discount_id = params[:discount_id]
+    @invoice.tax_id = params[:tax_id]
+    @invoice.year = Date.today.year
+    @invoice.invoice_id = @invoice.invoice_number
 
     respond_to do |format|
       if @invoice.save
@@ -76,6 +76,12 @@ class InvoicesController < ApplicationController
   # PUT /invoices/1.json
   def update
     @invoice = Invoice.find(params[:id])
+    @invoice.year = Date.today.year
+
+    @invoice.client_id = params[:clients]
+    @invoice.discount_id = params[:discount_id]
+    @invoice.tax_id = params[:tax_id]
+
 
     respond_to do |format|
       if @invoice.update_attributes(params[:invoice])

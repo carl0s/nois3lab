@@ -12,7 +12,10 @@ gem 'select2-rails'
 
 gem 'ckeditor', '3.7.3'
 
-gem "friendly_id", "~> 4.0.1"
+gem 'friendly_id', '~> 4.0.1'
+
+gem 'prawn', '~> 0.12.0'
+gem 'prawnto'
 
 gem 'carrierwave'
 gem 'mini_magick'
@@ -21,7 +24,8 @@ gem 'simple-navigation', '~> 3.9.0'
 
 # API External services
 
-gem 'tumblr_client'
+gem 'faraday'
+gem 'tumblr_client', :git => "https://github.com/BananaNeil/tumblr_client.git"
 gem 'behance'
 
 gem 'devise'

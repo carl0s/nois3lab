@@ -1,20 +1,33 @@
 <p id="notice"><%= notice %></p>
-
+<%= @company.name %>
+<p>
+  <b>N:</b>
+  <%= @invoice.invoice_number %>
+</p>
 <p>
   <b>Name:</b>
   <%= @invoice.name %>
 </p>
 
+
 <p>
   <b>Description:</b>
-  <%= @invoice.description %>
+  <%= @invoice.description.html_safe %>
 </p>
 
 <p>
   <b>Doc:</b>
   <%= @invoice.doc_id %>
 </p>
+<p>
+  <b>Client:</b>
+  <%= @invoice.client.name %>
+</p>
+<p>
+  <b>subtotal: <%= @invoice.subtotal %></b>
+</p>
 
+<%= link_to "Printable Invoice (PDF)", invoice_path(@invoice, :format => 'pdf') %>
 
 <%= link_to 'Edit', edit_invoice_path(@invoice) %> |
 <%= link_to 'Back', invoices_path %>

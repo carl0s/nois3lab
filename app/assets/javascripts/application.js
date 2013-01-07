@@ -59,38 +59,29 @@ $(function () {
     if($(this).parents('.item').find('input[name]').attr('value') == '') {
       $(this).parents('.item').find('input[name]').addClass('error');
     }
-    var total_price = $(this).parents('.item').find('.total span');
+    var total_price = $(this).parents('.item').find('#subtotal span');
     var unit_price = $(this).parents('.item').find('#unit_price').attr('value');
     var quantity = $(this).parents('.item').find('#count option:selected').attr('value');
-    var total = unit_price * quantity;
-    var discount_value = $(this).parents('.item').find('#discount option:selected').attr('value');
-    var discount = discount_value / 100;
-    var temp = 1 - discount;
-    var discounted_total = (total * temp).toFixed(2);
-    total_price.html(discounted_total);
+    var total = (unit_price * quantity).toFixed(2);
+    total_price.html(total);
   });
 
   $('.item .add_item').live('click', function(e) {
     e.preventDefault();
+    $(this).parents('changeable').attr('disabled');
     var name = $(this).parents('.item').find('input#name').attr('value');
     var total_price = $(this).parents('.item').find('.total span');
     var unit_price = $(this).parents('.item').find('#unit_price').attr('value');
     var quantity =  $(this).parents('.item').find('#count option:selected').attr('value');
-    var total = unit_price * quantity;
-    var discount_value = $(this).parents('.item').find('#discount option:selected').attr('value');
-    var discount = discount_value / 100;
-    var temp = 1 - discount;
-    var discounted_total = (total * temp).toFixed(2);
+    var total = (unit_price * quantity).toFixed(2);
 
-    if( discounted_total != 0 && name) {
+    if( total != 0 && name) {
       $(this).addClass('hidden');
       $.post('/add_item', {
                             invoice_id: $('#invoice_id').html(),
                             name:  name,
                             quantity: quantity,
                             unit_price: unit_price,
-                            discount: discount_value,
-                            total: discounted_total
       })
        .success(
         function() {
@@ -105,8 +96,31 @@ $(function () {
 
   $('.item .remove_item').live('click', function(e) {
     e.preventDefault();
-    $.post('/remove_item');
+    id = $(this).attr('id').replace('item_','');
+    alert(id);
+    $.post('/remove_item/' + id);
     $(this).parents('.item').remove();
   })
+
+  $('.item .edit_item').live('click', function(e) {
+    e.preventDefault();
+    $(this).find('input').removeAttr('disabled');
+    $(this).find('select').removeAttr('disabled');
+  })
+
+  $('#invoice_discount_id').live('change', function () {
+    var discount = $('#invoice_discount_id option:selected').html();
+    var subtotal = $('#subtotal span').html();
+    var total = (subtotal * (1 - discount/100)).toFixed(2);
+    $('#total').html(total);
+  });
+
+  $('#invoice_tax_id').live('change', function () {
+    var tax = $('#invoice_tax_id option:selected').html();
+    var subtotal = $('#total').html();
+    var total = (subtotal * (1 - tax/100)).toFixed(2);
+    $('#grand_total').html(total);
+
+  });
 
 });

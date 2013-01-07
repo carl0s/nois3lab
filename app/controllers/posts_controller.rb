@@ -1,8 +1,19 @@
 class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
+
   def index
     @posts = Post.all
+
+    Tumblr.configure do |config|
+        config.consumer_key = "nqrv0EyDf9lnb7u6TrkPXQCf634FM1UtnYlLxgixrRS9rr5c86"
+        config.consumer_secret = " dR25RkyxEqBkZV4ryqvkPI9i458kfriCRb7TFLzXsqjq95fjBw"
+        config.oauth_token = "access_token"
+        config.oauth_token_secret = "access_token_secret"
+    end
+
+    client = Tumblr.new
+    client.posts("nois3labn3.tumblr.com")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,8 +35,19 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.json
   def new
-    @post = Post.new
+    Tumblr.configure do |config|
+        config.consumer_key = "nqrv0EyDf9lnb7u6TrkPXQCf634FM1UtnYlLxgixrRS9rr5c86"
+        config.consumer_secret = " dR25RkyxEqBkZV4ryqvkPI9i458kfriCRb7TFLzXsqjq95fjBw"
+        config.oauth_token = "access_token"
+        config.oauth_token_secret = "access_token_secret"
+    end
 
+    client = Tumblr.new
+    client.posts("nois3labn3.tumblr.com")
+
+    logger.debug Tumblr
+
+    @post = Post.new
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @post }
