@@ -7,14 +7,7 @@ class Invoice < ActiveRecord::Base
   validates :client_id, :presence => true
 
   def invoice_number
-    @counter = InvoiceNumbers.first
-    if @counter.year != Date.today.year
-      @counter.year = Date.today.year
-      @counter.number = 0
-    end
-    @counter.number += 1
-    #@counter.save!
-    invoice_number= 'n3-' + @counter.number.to_s + '-' + @counter.year.to_s
+    return 'n3-' + invoice_id.to_s + '-' + year.to_s
   end
 
   def clients
@@ -31,10 +24,11 @@ class Invoice < ActiveRecord::Base
 
   def subtotal
     ret = 0
-    # @items = Item.find :all, :conditions => [ 'invoice_id = ?', @invoice.invoice_id ]
-    #@items.each do |item|
-    #  ret += item.total
-    #end
+    items = Item.find_all_by_invoice_id(invoice_id)
+    #logger.info items
+    items.each do |t|
+      ret += t.total
+    end
     return ret
   end
 

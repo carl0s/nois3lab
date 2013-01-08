@@ -17,7 +17,7 @@ class InvoicesController < ApplicationController
     @company = Company.first
     @invoice = Invoice.find(params[:id])
     @invoice.client = Client.find(@invoice.client_id)
-    @invoice.items = Item.find :all, :conditions => [ 'invoice_id = ?', @invoice.invoice_number ]
+    @items = Item.find_all_by_invoice_id(@invoice.invoice_id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -32,8 +32,9 @@ class InvoicesController < ApplicationController
   # GET /invoices/new.json
   def new
     @invoice = Invoice.new
+    @counter = InvoiceNumbers.first
+    @items = Item.find_all_by_invoice_id(@invoice.invoice_id)
 
-    # @invoice.subtotal = Item.sum :total_price, :conditions => [ 'invoice_id = ?', @invoice.invoice_number ]
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @invoice }
@@ -43,11 +44,8 @@ class InvoicesController < ApplicationController
   # GET /invoices/1/edit
   def edit
     @invoice = Invoice.find(params[:id])
-    @invoice.items = Item.find :all, :conditions => [ 'invoice_id = ?', @invoice.invoice_id ]
-
-    @clients = Client.find(:all)
-    @discounts = Discount.find(:all)
-    @taxes = Taxis.find(:all)
+    @counter = InvoiceNumbers.first
+    @items = Item.find_all_by_invoice_id(@invoice.invoice_id)
   end
 
   # POST /invoices
@@ -58,8 +56,15 @@ class InvoicesController < ApplicationController
     @invoice.client_id = params[:clients]
     @invoice.discount_id = params[:discount_id]
     @invoice.tax_id = params[:tax_id]
-    @invoice.year = Date.today.year
-    @invoice.invoice_id = @invoice.invoice_number
+    @counter = InvoiceNumbers.first
+    if @counter.year != Date.today.year
+      @counter.year = Date.today.year
+      @counter.number = 0
+    end
+    @counter.number += 1
+    @counter.save!
+    @invoice.year = @counter.year
+    @invoice.invoice_id = @counter.number
 
     respond_to do |format|
       if @invoice.save

@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<%= @company.name %>
+<%= @company.address %>
+<%= @company.iban %>
+<%= @company.swift %>
 
 <%= link_to 'Edit', edit_company_path(@company) %> |
 <%= link_to 'Back', companies_path %>

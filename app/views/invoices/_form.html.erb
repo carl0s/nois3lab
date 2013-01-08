@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="fied">
-    <h2 id="invoice_id"><%= @invoice.invoice_number %></h2>
+    <h3 id="invoice_id" class="hidden"><%= @counter.number %></h3>
   </div>
   <div class="field">
     <%= f.label :name %><br />
@@ -38,8 +38,7 @@
       <th>total price</th>
       <th></th>
     </tr>
-    <%= debug @invoice.invoice_id %>
-    <% @invoice.items.each do |t| %>
+    <% @items.each do |t| %>
         <tr class="item">
           <td>
             <%= text_field_tag 'name', nil, :disabled => true, :placeholder => 'Insert your item name', :value => t.name,  :class=> 'changeable' %>
@@ -52,7 +51,7 @@
           </td>
 
           <td class="total">
-            <span><%= total %></span> €
+            <span></span> €
           </td>
           <td>
             <a href="#" class="edit_item">edit</a>

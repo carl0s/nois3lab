@@ -15,7 +15,7 @@ class Item < ActiveRecord::Base
   end
 
   def total
-    return item.quantity * item.unit_price
+    return quantity * unit_price
   end
 
 end

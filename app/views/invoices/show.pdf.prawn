@@ -31,6 +31,13 @@ pdf.font('Gotham')
     pdf.fill_color(0,0,0,75)
     pdf.text_box @invoice.description.html_safe, :size => 10, :at => [0, 485]
 
-@invoice.items.each do |t|
-  pdf.text "a"
-end
+  @invoice.items.each do |t|
+    pdf.fill_color "EEEEEE"
+    pdf.fill_rectangle [0,380], 400, 16
+    pdf.fill_color "333333"
+    pdf.text_box t.name, :size => 10, :style => :bold, :at => [5, 376]
+    pdf.fill_color "333333"
+    pdf.text_box t.quantity.to_s, :size => 10, :style => :bold, :at => [300, 376]
+    pdf.fill_color "333333"
+    pdf.text_box t.unit_price.to_s, :size => 10, :style => :bold, :at => [350, 376]
+  end
