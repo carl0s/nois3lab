@@ -4,6 +4,13 @@ class WorksController < ApplicationController
   # GET /works
   # GET /works.json
 
+  def update_all
+    client.user_projects('emanuelemacri').each do |t|
+      @work.title = t.post.title
+      @work.save!
+    end
+  end
+
   def index
     @works = Work.all
 
@@ -118,23 +125,5 @@ class WorksController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-  # def add_tag
-  #   if request.request_method != 'POST'
-  #     render :json => false
-  #     return
-  #   end
-
-  #   if params.nil? or !params.include? "work_id" or !params.include? "tag"
-  #     render :json => false
-  #     return
-  #   end
-
-  #   tag = Tag.new
-  #   tag.work_id = params['work_id']
-  #   tag.name = params['tag_name']
-  #   render :json => tag.save!
-  # end
-
 
 end

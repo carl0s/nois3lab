@@ -11,6 +11,8 @@ Nois3lab::Application.routes.draw do
 
   devise_for :users
 
+  match '/update_all' => 'works#update_all'
+
   match '/add_item' => 'items#create'
   match '/remove_item/:id' => 'invoices#remove_item'
   match '/auth/:provider/callback' => 'authentications#create'

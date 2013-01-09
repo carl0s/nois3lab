@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name, :placeholder => :name %>
+    <%= f.text_field :name, :placeholder => :name, :value => @work.client.user_projects('robbincenijn').projects.title  %>
   </div>
   <div class="field">
     <%= f.label :year %><br />
