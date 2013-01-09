@@ -17,6 +17,10 @@ Nois3lab::Application.routes.draw do
   # match '/logout' => 'authentications#destroy'
   match '/tags/:id' => 'tags#list'
 
+  match '/invoices/:id/send' => 'invoices#send'
+  match '/invoices/:id/issue' => 'invoices#issue'
+
+
   mount Ckeditor::Engine => "/ckeditor"
 
   resources :event_details

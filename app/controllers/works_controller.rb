@@ -36,6 +36,9 @@ class WorksController < ApplicationController
   # GET /works/new.json
   def new
     @work = Work.new
+
+    logger.info @work.be.user_projects('nois3lab')
+
     @tags = Tag.all
     @media_asset = MediaAsset.all
     respond_to do |format|

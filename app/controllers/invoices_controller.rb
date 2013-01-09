@@ -56,6 +56,7 @@ class InvoicesController < ApplicationController
     @invoice.client_id = params[:clients]
     @invoice.discount_id = params[:discount_id]
     @invoice.tax_id = params[:tax_id]
+    @invoice.status = Invoice::DRAFT
     @counter = InvoiceNumbers.first
     if @counter.year != Date.today.year
       @counter.year = Date.today.year
@@ -114,6 +115,21 @@ class InvoicesController < ApplicationController
   def remove_item
     @item = Item.find(params[:id])
     @item.destroy
+  end
+
+  def issue
+    @invoice.status = Invoice::ISSUED
+    @invoice.save!
+  end
+
+  def send
+    @invoice.status = Invoice::SENT
+    @invoice.save!
+  end
+
+  def pending 
+    @invoice.status = Invoice::PENDING
+    @invoice.save!
   end
 
 end

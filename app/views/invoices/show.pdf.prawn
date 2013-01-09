@@ -4,7 +4,7 @@ pdf.font_families.update(
 )
 
 logo = "#{Rails.root}/public/images/nois3lab_invoice.png"
-pdf.image logo, :at => [520,720], :scale => 0.5
+pdf.image logo, :at => [520,720], :scale => 1
 
 pdf.font('Gotham')
   pdf.fill_color "999999"

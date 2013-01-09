@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130107215405) do
+ActiveRecord::Schema.define(:version => 20130108154325) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20130107215405) do
     t.integer  "year"
     t.integer  "discount_id"
     t.integer  "invoice_id"
+    t.string   "status"
   end
 
   create_table "items", :force => true do |t|

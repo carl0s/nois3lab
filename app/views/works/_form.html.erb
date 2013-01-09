@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-
+  <%= debug @work.be.user_projects("nois3lab") %>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, :placeholder => :name %>
@@ -52,17 +52,6 @@
     </ul>
   </div>
 
-  <script>
-    // function add_tag() {
-    //   var tags = document.getElementById('tags');
-    //   var input = document.createElement('input');
-    //   input.setAttribute('type', 'text');
-    //   input.setAttribute('name', 'tags[]');
-    //   input.setAttribute('onchange', 'add_tag()');
-    //   tags.appendChild(input);
-    // }
-    // add_tag();
-  </script>
   <div class="field">
     <h2>Service</h2>
     <%= collection_select(:work, :service_id, Service.find(:all), :id, :name) %>

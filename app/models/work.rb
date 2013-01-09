@@ -11,4 +11,9 @@ class Work < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, :use => :slugged
 
+  def be
+    Behance::Client.new(access_token: "orHrLH.ahP9tVDyjxy2qxJJ04HC0D.6V")
+  end
+
+
 end
