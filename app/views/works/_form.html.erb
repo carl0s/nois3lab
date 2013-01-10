@@ -10,10 +10,12 @@
       </ul>
     </div>
   <% end %>
-
+  <% @work.be.user_projects("emanuelemacri").each do |t| %>
+    <%= t['name'] %>
+  <% end %> 
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name, :placeholder => :name, :value => @work.client.user_projects('robbincenijn').projects.title  %>
+    <%= f.text_field :name, :placeholder => :name %>
   </div>
   <div class="field">
     <%= f.label :year %><br />
@@ -52,17 +54,6 @@
     </ul>
   </div>
 
-  <script>
-    // function add_tag() {
-    //   var tags = document.getElementById('tags');
-    //   var input = document.createElement('input');
-    //   input.setAttribute('type', 'text');
-    //   input.setAttribute('name', 'tags[]');
-    //   input.setAttribute('onchange', 'add_tag()');
-    //   tags.appendChild(input);
-    // }
-    // add_tag();
-  </script>
   <div class="field">
     <h2>Service</h2>
     <%= collection_select(:work, :service_id, Service.find(:all), :id, :name) %>

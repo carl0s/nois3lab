@@ -43,6 +43,9 @@ class WorksController < ApplicationController
   # GET /works/new.json
   def new
     @work = Work.new
+
+    logger.info @work.be.user_projects('nois3lab')
+
     @tags = Tag.all
     @media_asset = MediaAsset.all
     respond_to do |format|
@@ -125,5 +128,31 @@ class WorksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def sync
+    @works = Work.all
+
+    @works.each do |k|
+      k.be.user_projects("arsthanea").each do |t|
+
+        # if(k.updated_at.to_i < t['modified_on'])
+          @be_work = Work.new
+          @be_work.name = t['name']
+          @be_work.year = Date.today.year
+          @be_work.content = t['content']
+          @be_work.service_id = '1'
+          @be_work.teammate_id = '1'
+          @be_work.client_id = '1'
+          @be_work.save!
+        # else
+        #   next
+        # end
+      end
+
+    end
+
+    redirect_to action: "index"
+  end
+
 
 end
