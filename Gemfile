@@ -25,7 +25,7 @@ gem 'simple-navigation', '~> 3.9.0'
 # API External services
 
 gem 'faraday'
-gem 'tumblr_client', :git => "https://github.com/BananaNeil/tumblr_client.git"
+gem 'tumblife'
 gem 'behance'
 
 gem 'devise'
