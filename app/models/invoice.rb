@@ -12,7 +12,7 @@ class Invoice < ActiveRecord::Base
   validates :client_id, :presence => true
 
   def invoice_number
-    return 'n3-' + invoice_id.to_s + '-' + year.to_s
+    return 'FT-' + invoice_id.to_s + '-' + year.to_s
   end
 
   def clients

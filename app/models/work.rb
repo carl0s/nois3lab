@@ -12,7 +12,7 @@ class Work < ActiveRecord::Base
   friendly_id :name, :use => :slugged
 
   def be
-    Behance::Client.new(access_token: "orHrLH.ahP9tVDyjxy2qxJJ04HC0D.6V")
+    Behance::Client.new(access_token: "clRawMwGg12qBuxUMW2NBsNBkgdfdRJy")
   end
 
 

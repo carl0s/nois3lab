@@ -117,19 +117,6 @@ class InvoicesController < ApplicationController
     @item.destroy
   end
 
-  def issue
-    @invoice.status = Invoice::ISSUED
-    @invoice.save!
-  end
 
-  def send
-    @invoice.status = Invoice::SENT
-    @invoice.save!
-  end
-
-  def pending 
-    @invoice.status = Invoice::PENDING
-    @invoice.save!
-  end
 
 end

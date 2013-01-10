@@ -10,10 +10,12 @@
       </ul>
     </div>
   <% end %>
-  <%= debug @work.be.user_projects("nois3lab") %>
+  <% @work.be.user_projects("emanuelemacri").each do |t| %>
+    <%= t['name'] %>
+  <% end %> 
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name, :placeholder => :name, :value => @work.client.user_projects('robbincenijn').projects.title  %>
+    <%= f.text_field :name, :placeholder => :name %>
   </div>
   <div class="field">
     <%= f.label :year %><br />
