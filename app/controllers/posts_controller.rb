@@ -14,6 +14,7 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
+    @post.avatar = @post.client.avatar('nois3labn3.tumblr.com')
 
     respond_to do |format|
       format.html # show.html.erb
@@ -40,19 +41,8 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(params[:post])
-    require 'tumblife'
 
-    Tumblife.configure do |config|
-      config.consumer_key = YOUR_CONSUMER_KEY
-      config.consumer_secret = YOUR_CONSUMER_SECRET
-      config.oauth_token = YOUR_OAUTH_TOKEN
-      config.oauth_token_secret = YOUR_OAUTH_TOKEN_SECRET
-    end
-
-    client = Tumblife.client
-
-    client.text("nois3labn3.tumblr.com", :title => params[:title], :body => params[:content])
-    logger.info @post.tumblr.post("nois3labn3.tumblr.com", {:data => [params[:title], params[:content]]})
+    #client.text("nois3labn3.tumblr.com", :title => params[:title], :body => params[:content])
 
     respond_to do |format|
       if @post.save

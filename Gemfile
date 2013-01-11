@@ -25,7 +25,7 @@ gem 'simple-navigation', '~> 3.9.0'
 # API External services
 
 gem 'faraday'
-gem 'tumblife'
+gem 'tumblife', '1.2.0'
 gem 'behance'
 
 gem 'devise'
