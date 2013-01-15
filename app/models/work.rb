@@ -4,16 +4,12 @@ class Work < ActiveRecord::Base
   has_many :tags
   validates :name, :presence => true
   validates :year, :presence => true
-  validates :teammate_id, :presence => true
-  validates :service_id, :presence => true
-  validates :client_id, :presence => true
 
   extend FriendlyId
   friendly_id :name, :use => :slugged
 
-  def be
+  def self.be
     Behance::Client.new(access_token: "clRawMwGg12qBuxUMW2NBsNBkgdfdRJy")
   end
-
 
 end

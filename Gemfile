@@ -25,13 +25,15 @@ gem 'simple-navigation', '~> 3.9.0'
 # API External services
 
 gem 'faraday'
-gem 'tumblife'
+# gem 'tumblife', :git => "https://github.com/brainsley/tumblife-for-ruby.git"
+gem 'tumblr-ruby', :git => 'https://github.com/mgolovnia/tumblr.git'
 gem 'behance'
 
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+gem 'omniauth-tumblr'
 gem 'oauth2'
 
 # Gems used only for assets and not required

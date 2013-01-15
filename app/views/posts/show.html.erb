@@ -4,10 +4,7 @@
   <%= @post.title %>
 </p>
 
-<p>
-  <b>Content:</b>
-  <%= @post.content %>
-</p>
+<%= @post.content.html_safe %>
 
 
 <%= link_to 'Edit', edit_post_path(@post) %> |

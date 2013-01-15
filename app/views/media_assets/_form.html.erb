@@ -23,6 +23,13 @@
     <%= image_tag(@media_asset.image, :size => '50x50', :alt => @media_asset.name, :class => 'thumb') %>
   </div>
   <div class="field">
+    <%= f.text_field :behance_src %>
+  </div>
+  <div class="field">
+    <%= f.text_area :behance_embed %>
+  </div>
+
+  <div class="field">
     <%= f.file_field :image %>
     <%= f.hidden_field :image_cache %>
   </div>

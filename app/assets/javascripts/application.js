@@ -123,5 +123,8 @@ $(function () {
     $('#grand_total').html(total);
 
   });
+});
 
+$(window).load(function() {
+    $("#featured").orbit({ fluid: '16x9' });
 });

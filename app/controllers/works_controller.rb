@@ -29,10 +29,23 @@ class WorksController < ApplicationController
     @client = Client.find(@client_id)
     @teammate_id = @work.teammate_id
     @teammate = Teammate.find(@teammate_id)
-    @media_id = @work.media_id
-    @media_asset = MediaAsset.find(@media_id)
-    @service_id = @work.service_id
-    @service = Service.find(@service_id)
+    @service = Service.find(@work.service_id)
+
+    @media_asset = MediaAsset.find(:all, :conditions => { :work_id => @work.project_id })
+
+    @media_asset.each do |t|
+      url = t.behance_src
+      if(t.cache_field.nil?)
+        @image = MiniMagick::Image.open(url)
+        @web_path = '/images/t_' + t.id.to_s + "_" + "thumb" + ".jpg"
+        @path_name = Rails.root.join('public', 'images', "t_" + t.id.to_s + "_" +"thumb" + ".jpg")
+        @thumb =  @image.write(@path_name)
+        t.cache_field = @web_path
+        t.save!
+      end
+      puts t.cache_field
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: {:work => @work, :client => @client, :teammate => @teammate, :media_asset => @media_asset, :service => @service } }

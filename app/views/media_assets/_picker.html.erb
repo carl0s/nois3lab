@@ -4,5 +4,8 @@
     <%= link_to "#", :id => media.name, :class => 'media_item' do %>
       <%= image_tag(media.image.thumb, :alt => media.name, :id => media.id, :class => 'thumb', :size => '100x100') %>
     <% end %>
+    <%= link_to "#", :id => media.name, :class => 'media_item' do %>
+      <%= image_tag(media.behance_src, :alt => media.name, :id => media.id, :class => 'thumb', :size => '100x100') %>
+    <% end %>
   <% end %>
 </div>
