@@ -25,7 +25,7 @@ gem 'simple-navigation', '~> 3.9.0'
 # API External services
 
 gem 'faraday'
-# gem 'tumblife', :git => "https://github.com/brainsley/tumblife-for-ruby.git"
+
 gem 'tumblr-ruby', :git => 'https://github.com/mgolovnia/tumblr.git'
 gem 'behance'
 

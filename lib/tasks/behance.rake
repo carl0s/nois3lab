@@ -2,6 +2,7 @@ namespace :be do
   desc "Sync all Projects from a given Behance ID"
   task :sync => :environment do
   	@company = Company.first
+
     @work_last = Work.last
   	#@be = Work.be.user_projects(@company.behance)
     @be = Work.be.user_projects('loulouandtummie')
