@@ -7,7 +7,6 @@ class Post < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, :use => :slugged
 
-<<<<<<< HEAD
   def tumblr
     tumblr = Tumblr::Client.new do |client|
       client.consumer_key = 'nqrv0EyDf9lnb7u6TrkPXQCf634FM1UtnYlLxgixrRS9rr5c86'
@@ -16,7 +15,8 @@ class Post < ActiveRecord::Base
       client.oauth_token_secret = 'THgZScm3OeqHPJ0DpcRcVm9gTkRpRBrfGi5BPTgrXTIt0omp6u'
     end
     return tumblr
-=======
+  end
+
   def client
     Tumblife.configure do |config|
       config.consumer_key = 'FJjyfZ8fhCeZGaepY3QEZX6AGxn7pv8XzT3O5LzFeKgO36EdJE'
@@ -26,7 +26,6 @@ class Post < ActiveRecord::Base
     end
 
     return client = Tumblife.client
->>>>>>> 31db691a33046cfebe69fb24b6ebd2a15023b114
   end
 
 end

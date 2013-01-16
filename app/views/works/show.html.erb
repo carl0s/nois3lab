@@ -6,10 +6,11 @@
       <li><%= @service.name %></li>
     </ul>
       <div id="featured">
+        <%= debug @thumb_resized %>
         <%
         @media_asset.each do |t|
         %>
-          <%= image_tag(t.cache_field, :class => 'orbit-slide') %>
+          <%= image_tag(t.thumb_cache_field, :class => 'orbit-slide') %>
         <%
         end
         %>

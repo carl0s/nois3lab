@@ -33,8 +33,11 @@ namespace :be do
                   @media.save!
               end
             end
+        @be_work.client_id = 1
+        @be_work.service_id = 1
+        @be_work.teammate_id = 1
         @be_work.year = Date.today.year
-        @be_work.state = 'draft'
+        @be_work.status = 'draft'
         puts "[LOG][SUCCESS] Synced work #{@be_work.name} created on Behance on #{@be_work.year} "
         @be_work.save!
       end

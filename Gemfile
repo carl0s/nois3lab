@@ -10,7 +10,7 @@ gem 'sqlite3'
 gem 'rocket_tag'
 gem 'select2-rails'
 
-gem 'ckeditor', '3.7.3'
+gem 'ckeditor', '3.7.3', :git => 'https://github.com/lafeber/ckeditor.git'
 
 gem 'friendly_id', '~> 4.0.1'
 
@@ -26,6 +26,7 @@ gem 'simple-navigation', '~> 3.9.0'
 
 gem 'faraday'
 
+gem 'tumblr-rb'
 gem 'tumblr-ruby', :git => 'https://github.com/mgolovnia/tumblr.git'
 gem 'behance'
 

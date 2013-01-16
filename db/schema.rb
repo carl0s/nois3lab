@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130114232902) do
+ActiveRecord::Schema.define(:version => 20130115205558) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -120,8 +120,8 @@ ActiveRecord::Schema.define(:version => 20130114232902) do
 
   create_table "media_assets", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "image"
     t.integer  "category"
     t.integer  "work_id"
@@ -131,7 +131,8 @@ ActiveRecord::Schema.define(:version => 20130114232902) do
     t.integer  "tag_id"
     t.string   "behance_src"
     t.text     "behance_embed"
-    t.string   "cache_field"
+    t.string   "thumb_cache_field"
+    t.string   "image_cache_field"
   end
 
 # Could not dump table "posts" because of following StandardError
@@ -242,15 +243,9 @@ ActiveRecord::Schema.define(:version => 20130114232902) do
     t.integer  "cover_image"
     t.integer  "year"
     t.string   "slug"
-    t.string   "facebook"
-    t.string   "twitter"
-    t.string   "behance"
-    t.string   "tumblr"
-    t.string   "pinterest"
     t.string   "status"
     t.integer  "updated_on"
     t.string   "project_id"
-    t.string   "state"
   end
 
   add_index "works", ["slug"], :name => "index_works_on_slug", :unique => true
