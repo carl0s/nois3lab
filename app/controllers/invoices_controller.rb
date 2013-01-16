@@ -18,7 +18,9 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
     @invoice.client = Client.find(@invoice.client_id)
     @items = Item.find_all_by_invoice_id(@invoice.invoice_id)
-
+    @invoice.tax_value = Taxis.find(:all, :conditions => { :id => @invoice.tax_id })
+    tax_value = @invoice.tax.value
+    #@tax_amount = @invoice.subtotal * (1 - @tax.value/100)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @invoice }

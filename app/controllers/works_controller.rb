@@ -38,10 +38,10 @@ class WorksController < ApplicationController
       if(t.image_cache_field.nil? && t.thumb_cache_field.nil?)
         @image = MiniMagick::Image.open(url)
         @cached_image = @image.clone
-        @web_path = '/uploads/' + t.name.to_s + ".jpg"
-        @thumb_path = '/uploads/t_' + t.name.to_s + "_" + "thumb" + ".jpg"
-        @path_name = Rails.root.join('public', 'uploads', "t_" + t.name + "_" +"thumb" + ".jpg")
-        @web_path_name = Rails.root.join('public', 'uploads', t.name + ".jpg")
+        @web_path = '/uploads/' + t.id.to_s + ".jpg"
+        @thumb_path = '/uploads/t_' + t.id.to_s + "_" + "thumb" + ".jpg"
+        @path_name = Rails.root.join('public', 'uploads', "t_" + t.id + "_" +"thumb" + ".jpg")
+        @web_path_name = Rails.root.join('public', 'uploads', t.id + ".jpg")
         @thumb_resized = @image.resize('300x300')
         #@thumb =  @thumb_resized.write(@path_name)
         @img = @cached_image.write(@web_path_name)

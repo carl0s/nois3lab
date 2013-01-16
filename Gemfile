@@ -10,7 +10,7 @@ gem 'sqlite3'
 gem 'rocket_tag'
 gem 'select2-rails'
 
-gem 'ckeditor', '3.7.3', :git => 'https://github.com/lafeber/ckeditor.git'
+gem 'ckeditor', '3.7.3'
 
 gem 'friendly_id', '~> 4.0.1'
 

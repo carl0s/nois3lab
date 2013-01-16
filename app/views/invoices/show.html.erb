@@ -19,16 +19,25 @@
   <b>Doc:</b>
   <%= @invoice.doc_id %>
 </p>
-<ul>
-<% @items.each do |t| %>
-  <li><%= t.name %></li>
-<% end %>
-</ul>
+
 <p>
   <b>Client:</b>
   <%= @invoice.client.name %>
 </p>
+
+<table>
+
+  <% @invoice.items.each do |t| %>
+    <tr>
+      <td><%=t.name %></td>
+      <td><%=t.quantity.to_s %></td>
+      <td><%=t.unit_price.to_s %> €</td>
+    </tr>
+  <% end %>
+
+</table>
 <p>
+  <%= @tax.tax_amount %>
   <b>subtotal: <%= @invoice.subtotal %></b>
 </p>
 

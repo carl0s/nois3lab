@@ -2,6 +2,7 @@ class Invoice < ActiveRecord::Base
   attr_accessible :description, :doc_id, :invoice_id, :client_id, :name, :discount_id, :tax_id
   belongs_to :client
   has_many :items, :dependent => :destroy
+  has_many :taxes
 
   DRAFT = :draft
   PENDING = :pending
