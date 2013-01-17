@@ -16,6 +16,10 @@ class Invoice < ActiveRecord::Base
     return 'FT-' + invoice_id.to_s + '-' + year.to_s
   end
 
+  def credit_number
+    return 'NC-' + invoice_id.to_s + '-' + year.to_s
+  end
+
   def clients
     clients = Client.find(:all)
   end

@@ -1,4 +1,6 @@
 <p id="notice"><%= notice %></p>
+<%= link_to "issue a credit note", :controller => "invoices", :action => "credit", :format => 'pdf' %>
+
 <%= @company.name %>
 <p>
   <b>N:</b>
@@ -37,7 +39,6 @@
 
 </table>
 <p>
-  <%= @tax.tax_amount %>
   <b>subtotal: <%= @invoice.subtotal %></b>
 </p>
 

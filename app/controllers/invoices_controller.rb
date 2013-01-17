@@ -18,11 +18,37 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
     @invoice.client = Client.find(@invoice.client_id)
     @items = Item.find_all_by_invoice_id(@invoice.invoice_id)
-    @invoice.tax_value = Taxis.find(:all, :conditions => { :id => @invoice.tax_id })
-    tax_value = @invoice.tax.value
+    # @invoice.tax_value = Taxis.find(:all, :conditions => { :id => @invoice.tax_id })
+    # tax_value = @invoice.tax.value
     #@tax_amount = @invoice.subtotal * (1 - @tax.value/100)
     respond_to do |format|
       format.html # show.html.erb
+      format.json { render json: @invoice }
+      format.pdf do
+        render :pdf => "file_name"
+      end
+    end
+  end
+
+  def credit
+    @company = Company.first
+    @invoice = Invoice.find(params[:id])
+    @invoice.client = Client.find(@invoice.client_id)
+    @items = Item.find_all_by_invoice_id(@invoice.invoice_id)
+    @counter = InvoiceNumbers.first
+    if @counter.year != Date.today.year
+      @counter.year = Date.today.year
+      @counter.number = 0
+    end
+    @counter.number += 1
+    @counter.save!
+    @invoice.year = @counter.year
+    @invoice.invoice_id = @counter.number
+    # @invoice.tax_value = Taxis.find(:all, :conditions => { :id => @invoice.tax_id })
+    # tax_value = @invoice.tax.value
+    #@tax_amount = @invoice.subtotal * (1 - @tax.value/100)
+    respond_to do |format|
+      format.html # credit.html.erb
       format.json { render json: @invoice }
       format.pdf do
         render :pdf => "file_name"

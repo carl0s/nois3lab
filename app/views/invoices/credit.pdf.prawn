@@ -15,7 +15,7 @@ pdf.font('Gotham')
     pdf.text "phone n: #{@company.phone}", :size => 9
 
   pdf.fill_color(15,100,80,5)
-    pdf.text_box "Invoice #{@invoice.invoice_number}", :size => 24, :style => :bold, :at => [0, 650]
+    pdf.text_box "Nota di credito #{@invoice.credit_number}", :size => 24, :style => :bold, :at => [0, 650]
     pdf.text_box "DESCRIZIONE", :size => 13, :style => :bold, :at => [0, 505]
     pdf.text_box "BONIFICO/WIRE TRANSFER", :size => 13, :style => :bold, :at => [0,45]
     pdf.text_box "IBAN #{@company.iban}", :size => 10, :at => [0,20]
@@ -39,8 +39,8 @@ pdf.font('Gotham')
       [
         t.name,
         t.quantity.to_s,
-        t.unit_price.to_s,
-        t.total.to_s + " EUR"
+        "-" + t.unit_price.to_s,
+        "-" + t.total.to_s + " EUR"
       ]
     end
 
@@ -61,6 +61,6 @@ pdf.font('Gotham')
 
 pdf.move_down(50)
 pdf.font('Gotham')
-  pdf.text "SUBTOTALE " + @invoice.subtotal.to_s + " EUR", :size => 18, :align => :right
+  pdf.text "SUBTOTALE CREDITO -" + @invoice.subtotal.to_s + " EUR", :size => 18, :align => :right
 
 
