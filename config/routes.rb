@@ -7,7 +7,11 @@ Nois3lab::Application.routes.draw do
 
   resources :items
 
-  resources :invoices
+  resources :invoices do
+    match 'send' => 'invoices#send'
+    match 'issue' => 'invoices#issue'
+  end
+
 
   devise_for :users
 
@@ -19,8 +23,6 @@ Nois3lab::Application.routes.draw do
   # match '/logout' => 'authentications#destroy'
   match '/tags/:id' => 'tags#list'
 
-  match '/invoices/:id/send' => 'invoices#send'
-  match '/invoices/:id/issue' => 'invoices#issue'
 
   match '/invoices/:id/credit' => 'invoices#credit'
 

@@ -16,6 +16,11 @@ pdf.font('Gotham')
 
   pdf.fill_color(15,100,80,5)
     pdf.text_box "Invoice #{@invoice.invoice_number}", :size => 24, :style => :bold, :at => [0, 650]
+  
+  pdf.fill_color "999999"
+    pdf.text_box "Roma #{Date.today}", :size => 12, :style => :normal, :align => :left, :at => [400, 620]
+  
+  pdf.fill_color(15,100,80,5)
     pdf.text_box "DESCRIZIONE", :size => 13, :style => :bold, :at => [0, 505]
     pdf.text_box "BONIFICO/WIRE TRANSFER", :size => 13, :style => :bold, :at => [0,45]
     pdf.text_box "IBAN #{@company.iban}", :size => 10, :at => [0,20]
