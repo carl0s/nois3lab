@@ -1,7 +1,8 @@
 <h1>Editing invoice <%= @invoice.invoice_number %> <span class="status">(<%= @invoice.status %>)</span></h1>
 
-<%= link_to 'Issue this invoice', 'a', :class => 'button' %>
-
+<div class="field actions">
+  <%= link_to 'ISSUE', invoice_issue_path(@invoice.id) %> | <%= link_to 'RETIRE', invoice_issue_path(@invoice.id) %>
+</div>
 <%= render 'form' %>
 
 <%= link_to 'Show', @invoice %> |

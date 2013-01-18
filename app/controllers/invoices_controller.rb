@@ -106,6 +106,32 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def issue
+    @invoice = Invoice.find(params[:invoice_id])
+    @invoice.status = Invoice::ISSUED
+    @counter = InvoiceNumbers.first
+    if @counter.year != Date.today.year
+      @counter.year = Date.today.year
+      @counter.number = 0
+    end
+    @counter.number += 1
+    @counter.save!
+    @invoice.year = @counter.year
+    @invoice.invoice_id = @counter.number
+
+    respond_to do |format|
+      if @invoice.save
+        format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
+        format.json { render json: @invoice, status: :created, location: @invoice }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @invoice.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+
   # PUT /invoices/1
   # PUT /invoices/1.json
   def update
