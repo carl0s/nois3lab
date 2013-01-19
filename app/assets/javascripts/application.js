@@ -74,7 +74,12 @@ $(function () {
     var unit_price = $(this).parents('.item').find('#unit_price').attr('value');
     var quantity =  $(this).parents('.item').find('#count option:selected').attr('value');
     var total = (unit_price * quantity).toFixed(2);
-    var invoice_id = $('#invoice_id').html();
+    
+    if($('#invoice_id').html()!='') {
+      var invoice_id = $('#invoice_id').html();
+    } else {
+      var invoice_id = 1
+    }
 
     if( total != 0 && name) {
       $(this).addClass('hidden');

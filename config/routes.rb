@@ -7,7 +7,12 @@ Nois3lab::Application.routes.draw do
 
   resources :items
 
-  resources :invoices
+  resources :invoices do
+    match 'send' => 'invoices#send'
+    match 'issue' => 'invoices#issue'
+    match 'undo' => 'invoices#credit'
+  end
+
 
   devise_for :users
 
@@ -18,7 +23,6 @@ Nois3lab::Application.routes.draw do
   match '/auth/:provider/callback' => 'authentications#create'
   # match '/logout' => 'authentications#destroy'
   match '/tags/:id' => 'tags#list'
-
 
   mount Ckeditor::Engine => "/ckeditor"
 
