@@ -30,6 +30,18 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def issue
+    @counter = InvoiceNumbers.first
+    if @counter.year != Date.today.year
+      @counter.year = Date.today.year
+      @counter.number = 0
+    end
+    @counter.number += 1
+    @counter.save!
+    @invoice.status = Invoice::ISSUED
+    @invoice.save!
+  end
+
   def credit
     @company = Company.first
     @invoice = Invoice.find(params[:id])
@@ -44,6 +56,7 @@ class InvoicesController < ApplicationController
     @counter.save!
     @invoice.year = @counter.year
     @invoice.invoice_id = @counter.number
+    @invoice.status = Invoice::RETIRED
     # @invoice.tax_value = Taxis.find(:all, :conditions => { :id => @invoice.tax_id })
     # tax_value = @invoice.tax.value
     #@tax_amount = @invoice.subtotal * (1 - @tax.value/100)
@@ -79,22 +92,13 @@ class InvoicesController < ApplicationController
   # POST /invoices
   # POST /invoices.json
   def create
-
     @invoice = Invoice.new(params[:invoice])
     @invoice.client_id = params[:clients]
     @invoice.discount_id = params[:discount_id]
     @invoice.tax_id = params[:tax_id]
     @invoice.status = Invoice::DRAFT
-    @counter = InvoiceNumbers.first
-    if @counter.year != Date.today.year
-      @counter.year = Date.today.year
-      @counter.number = 0
-    end
-    @counter.number += 1
-    @counter.save!
     @invoice.year = @counter.year
     @invoice.invoice_id = @counter.number
-
     respond_to do |format|
       if @invoice.save
         format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }

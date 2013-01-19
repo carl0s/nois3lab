@@ -8,6 +8,7 @@ class Invoice < ActiveRecord::Base
   PENDING = :pending
   ISSUED = :issued
   SENT = :sent
+  RETIRED = :retired
 
   validates :name, :presence => true
   validates :client_id, :presence => true
